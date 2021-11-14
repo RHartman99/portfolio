@@ -80,7 +80,7 @@ const grow = keyframes`
 const Content = styled.div(({ paused }) => [
   tw`px-24 bg-opacity-30 max-h-0 overflow-hidden`,
   css`
-    background-color: #06112360;
+    background-color: #06112380;
   `,
   !paused &&
     css`
