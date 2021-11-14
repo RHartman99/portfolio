@@ -25,7 +25,7 @@ const Title = styled.h1`
 `;
 
 const Background = styled.div(({ loaded }) => [
-  tw`w-full h-full object-cover absolute opacity-0 transition-all scale-150 duration-1000 ease-in-out z-10`,
+  tw`w-full h-full object-cover absolute overflow-hidden opacity-0 transition-all scale-150 duration-1000 ease-in-out z-10`,
   loaded && tw`opacity-100 scale-100`,
 ]);
 
@@ -41,9 +41,6 @@ const fadeIn = keyframes`
 
 const Description = styled.p(({ paused, delay }) => [
   tw`text-xl mt-4 opacity-0 leading-relaxed relative`,
-  css`
-    max-width: 400px;
-  `,
   !paused &&
     css`
       animation: ${fadeIn} 0.6s ease-in-out forwards;
@@ -71,19 +68,22 @@ const Corner = styled.div`
 
 const grow = keyframes`
   from {
-    padding: 0 6rem;
+    padding: 0;
     max-height: 0;
   }
 
   to {
-    padding: 6rem;
+    padding: 6rem 0;
     max-height: 100vh;
   }
 `;
 
 const Content = styled.div(({ paused }) => [
-  tw`px-12 bg-opacity-30 max-h-0 overflow-hidden h-screen w-full md:(h-auto w-auto px-24) flex flex-col items-center justify-center`,
+  tw`px-0 bg-opacity-30 max-h-0 h-screen w-full md:(h-auto px-24!) flex flex-col items-center justify-center`,
   css`
+    @media (min-width: 768px) {
+      width: 600px;
+    }
     background-color: #06112380;
   `,
   !paused &&
@@ -103,7 +103,7 @@ const FrontHero = ({ ref: _, title, description, ...rest }) => {
         THREE: THREE,
         mouseControls: true,
         touchControls: true,
-        gyroControls: true,
+        gyroControls: false,
         minHeight: 200.0,
         minWidth: 200.0,
         scale: 1.0,
@@ -120,11 +120,7 @@ const FrontHero = ({ ref: _, title, description, ...rest }) => {
 
   return (
     <Section {...rest}>
-      <Background
-        tw="w-full h-full object-cover absolute top-0 left-0 bg-secondary"
-        loaded={loaded}
-        ref={heroRef}
-      ></Background>
+      <Background loaded={loaded} ref={heroRef}></Background>
       <Content paused={!loaded}>
         <AnimatedTitle paused={!loaded} component={Title} delay={0.5}>
           {title}
