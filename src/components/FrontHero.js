@@ -13,10 +13,14 @@ const Section = styled.section`
 `;
 
 const Title = styled.h1`
-  ${tw`text-6xl`}
+  ${tw`text-4xl md:text-6xl -mx-4`}
 
   & > span:last-child {
     ${tw`font-bold`}
+  }
+
+  & > span {
+    ${tw`px-1 md:px-2`}
   }
 `;
 
@@ -78,7 +82,7 @@ const grow = keyframes`
 `;
 
 const Content = styled.div(({ paused }) => [
-  tw`px-24 bg-opacity-30 max-h-0 overflow-hidden`,
+  tw`px-12 bg-opacity-30 max-h-0 overflow-hidden h-screen w-full md:(h-auto w-auto px-24) flex flex-col items-center justify-center`,
   css`
     background-color: #06112380;
   `,
@@ -99,7 +103,7 @@ const FrontHero = ({ ref: _, title, description, ...rest }) => {
         THREE: THREE,
         mouseControls: true,
         touchControls: true,
-        gyroControls: false,
+        gyroControls: true,
         minHeight: 200.0,
         minWidth: 200.0,
         scale: 1.0,

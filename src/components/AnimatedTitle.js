@@ -21,7 +21,7 @@ const Character = styled.span(({ number, delay, pause }) => [
       animation-delay: ${number * 0.04 + delay}s;
     `,
 ]);
-const Word = tw.span`mx-2`;
+const Word = tw.span`px-2`;
 
 const AnimatedTitle = ({ component: Component, paused, delay, children }) => {
   let charNum = 0;
