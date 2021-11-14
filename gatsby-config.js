@@ -5,9 +5,17 @@ module.exports = {
   },
   plugins: [
     "gatsby-plugin-image",
-    "gatsby-plugin-mdx",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
+    "gatsby-plugin-styled-components",
+    {
+      resolve: "gatsby-plugin-webfonts",
+      options: {
+        fonts: {
+          google: [{ family: "Montserrat", variants: ["400", "700", "900"] }],
+        },
+      },
+    },
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -20,9 +28,10 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "pages",
-        path: "./src/pages/",
+        path: `${__dirname}/src/content/`,
       },
       __key: "pages",
     },
+    "gatsby-plugin-mdx",
   ],
 };
