@@ -4,16 +4,17 @@ import * as THREE from "three";
 import NET from "vanta/dist/vanta.net.min.js";
 import AnimatedTitle from "./AnimatedTitle";
 import { keyframes } from "styled-components";
+import SocialMedia from "./SocialMedia";
 
 const Section = styled.section`
-  ${tw`w-full text-center text-white min-h-screen relative bg-secondary flex flex-col items-center justify-center overflow-hidden`}
+  ${tw`relative flex flex-col items-center justify-center w-full min-h-screen overflow-hidden text-center text-white bg-secondary`}
   & > * {
     ${tw`relative z-20`}
   }
 `;
 
 const Title = styled.h1`
-  ${tw`text-4xl md:text-6xl -mx-4`}
+  ${tw`-mx-4 text-4xl md:text-6xl`}
 
   & > span:last-child {
     ${tw`font-bold`}
@@ -25,8 +26,8 @@ const Title = styled.h1`
 `;
 
 const Background = styled.div(({ loaded }) => [
-  tw`w-full h-full object-cover absolute overflow-hidden opacity-0 transition-all scale-150 duration-1000 ease-in-out z-10`,
-  loaded && tw`opacity-100 scale-100`,
+  tw`absolute z-10 object-cover w-full h-full overflow-hidden transition-all duration-1000 ease-in-out scale-150 opacity-0`,
+  loaded && tw`scale-100 opacity-100`,
 ]);
 
 const fadeIn = keyframes`
@@ -40,7 +41,7 @@ const fadeIn = keyframes`
 `;
 
 const Description = styled.p(({ paused, delay }) => [
-  tw`text-xl mt-4 opacity-0 leading-relaxed relative`,
+  tw`relative mt-4 text-xl leading-relaxed opacity-0`,
   !paused &&
     css`
       animation: ${fadeIn} 0.6s ease-in-out forwards;
@@ -92,7 +93,7 @@ const Content = styled.div(({ paused }) => [
     `,
 ]);
 
-const FrontHero = ({ ref: _, title, description, ...rest }) => {
+const FrontHero = ({ title, description, socials, ref: _, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
   const vantaEffect = useRef(null);
   const heroRef = useRef(null);
@@ -133,6 +134,10 @@ const FrontHero = ({ ref: _, title, description, ...rest }) => {
         <Corner tw="rotate-180 top-auto bottom-0 right-0 left-auto" />
         <Corner tw="-rotate-90 top-auto bottom-0" />
       </Content>
+      <SocialMedia
+        media={socials}
+        tw="absolute bottom-8 right-1/2 translate-x-1/2 sm:(translate-x-0 right-8)"
+      />
     </Section>
   );
 };

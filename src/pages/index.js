@@ -5,10 +5,12 @@ import Layout from "../components/Layout";
 
 // markup
 const IndexPage = ({ data }) => {
-  const { title, description } = data.mdx.frontmatter;
+  const { title, description, socials } = data.mdx.frontmatter;
+  const frontHeroProps = { title, description, socials };
+  console.log(socials);
   return (
     <Layout>
-      <FrontHero title={title} description={description} />
+      <FrontHero {...frontHeroProps} />
     </Layout>
   );
 };
@@ -19,6 +21,10 @@ export const pageQuery = graphql`
       frontmatter {
         title
         description
+        socials {
+          url
+          icon
+        }
       }
     }
   }
